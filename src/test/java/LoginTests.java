@@ -15,13 +15,10 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
 
-        //Step 1
+
         navigateToPage();
-        //Step 2
         provideEmail("sviatlana.rysiavets@testpro.io");
-        //Step 3
         providePassword("nTtAZKUq");
-        //Step 4
         clickSubmit();
         //Avatar Icon for Actual VS Expected
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
