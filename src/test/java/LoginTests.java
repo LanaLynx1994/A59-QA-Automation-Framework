@@ -21,10 +21,8 @@ public class LoginTests extends BaseTest {
         provideEmail("sviatlana.rysiavets@testpro.io");
         //Step 3
         providePassword("nTtAZKUq");
-        Thread.sleep(2000);
         //Step 4
         clickSubmit();
-        Thread.sleep(4000);
         //Avatar Icon for Actual VS Expected
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         //Assertions - Expected vs Actual
