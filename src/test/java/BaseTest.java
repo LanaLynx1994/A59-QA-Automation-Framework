@@ -17,6 +17,7 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
     }
 
@@ -28,27 +29,37 @@ public class BaseTest {
 
       driver = new ChromeDriver(options);
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+      driver.manage().window().maximize();
     }
     @AfterMethod
     public void clearBrowser(){
-      driver.quit();
+
+        driver.quit();
     }
-    public void navigateToPage(){
+
+    public void navigateToPage() throws InterruptedException {
+
         driver.get(url);
+        Thread.sleep(2000);
     }
-public void provideEmail(String email){
-    WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-    emailField.clear();
-    emailField.sendKeys(email);
-}
-public void providePassword(String password){
-    WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-    passwordField.clear();
-    passwordField.sendKeys(password);
-}
-public void clickSubmit(){
-    WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
-    loginButton.click();
-}
+
+    public void provideEmail(String email) throws InterruptedException {
+        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.clear();
+        emailField.sendKeys(email);
+        Thread.sleep(2000);
+    }
+
+    public void providePassword(String password) throws InterruptedException {
+        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        Thread.sleep(2000);
+    }
+
+    public void clickSubmit() throws InterruptedException {
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        loginButton.click();
+        Thread.sleep(2000);
+    }
 }
