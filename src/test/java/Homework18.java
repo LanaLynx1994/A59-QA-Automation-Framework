@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class Homework18 extends BaseTest{
     @Test
     public void playSong() throws InterruptedException {
-        navigateToPage();
+      //  navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
