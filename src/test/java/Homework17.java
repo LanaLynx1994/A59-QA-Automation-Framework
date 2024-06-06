@@ -10,7 +10,7 @@ import java.time.Duration;
 public class Homework17 extends BaseTest{
     @Test
     public void addSongToPlaylist() throws InterruptedException {
-        navigateToPage();
+      //  navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();

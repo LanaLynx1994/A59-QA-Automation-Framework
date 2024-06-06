@@ -4,15 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver = null;
-    public String url = "https://qa.koel.app/";
+  //String url = "https://qa.koel.app/";
+
 
 
     @BeforeSuite
@@ -22,7 +21,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void launchBrowser(){
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String baseURL) throws InterruptedException {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
@@ -30,6 +30,7 @@ public class BaseTest {
       driver = new ChromeDriver(options);
       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
       driver.manage().window().maximize();
+      navigateToPage(baseURL);
     }
     @AfterMethod
     public void clearBrowser(){
@@ -37,7 +38,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void navigateToPage() throws InterruptedException {
+    public void navigateToPage(String url) throws InterruptedException {
 
         driver.get(url);
         Thread.sleep(2000);
