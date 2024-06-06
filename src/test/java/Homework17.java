@@ -21,7 +21,7 @@ public class Homework17 extends BaseTest{
         Thread.sleep(2000);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='success show']")));
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         String actualMessage = notification.getText();
         String expectedMessage = "Added 1 song into \"H17.\"";
         Assert.assertEquals(actualMessage, expectedMessage);
