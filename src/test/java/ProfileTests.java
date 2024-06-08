@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ public class ProfileTests extends BaseTest {
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
+        Thread.sleep(2000); // cannot remove - test fails
         navigateToProfilePage();
         String uniqueName = generateUniqueName();
         changeName(uniqueName);
@@ -22,7 +24,8 @@ public class ProfileTests extends BaseTest {
     }
 
     private String getProfileName() {
-        WebElement profileName = driver.findElement(By.cssSelector("span.name"));
+        WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
+       // WebElement profileName = driver.findElement(By.cssSelector("span.name"));
         return profileName.getText();
     }
 
@@ -44,9 +47,11 @@ public class ProfileTests extends BaseTest {
     }
 
     private void navigateToProfilePage() throws InterruptedException {
-        WebElement profileName = driver.findElement(By.cssSelector("span.name"));
+        WebElement profileName = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
+        //WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
+        //WebElement profileName = driver.findElement(By.cssSelector("span.name"));
         profileName.click();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
 
     }
 

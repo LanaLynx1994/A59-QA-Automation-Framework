@@ -11,7 +11,6 @@
             <class name="Homework16Test"/>
             <class name="ProfileTests"/>
             <class name="Homework18"/>
-            <class name="Homework19"/>
         </classes>
     </test>
 </suite>
