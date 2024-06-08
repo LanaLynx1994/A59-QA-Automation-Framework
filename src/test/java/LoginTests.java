@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,7 +28,8 @@ public class LoginTests extends BaseTest {
         providePassword("nTtAZKUq");
         clickSubmit();
         //Avatar Icon for Actual VS Expected
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+        //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         //Assertions - Expected vs Actual
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
