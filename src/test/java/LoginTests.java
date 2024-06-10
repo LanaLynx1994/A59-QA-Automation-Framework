@@ -20,7 +20,7 @@ public class LoginTests extends BaseTest {
 
     // Happy path - Login Test
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
+    public void loginValidEmailPassword(){
 
 
        // navigateToPage();
@@ -36,7 +36,7 @@ public class LoginTests extends BaseTest {
 
     // Not so happy Path - Negative Test case
   //  @Test
-    public void loginWithInvalidEmailValidPassword() throws InterruptedException {
+    public void loginWithInvalidEmailValidPassword() {
 
         //Step 1
        // navigateToPage();
@@ -54,7 +54,7 @@ public class LoginTests extends BaseTest {
 
     // Not so Happy path - Login Test
    // @Test
-    public void loginWithValidEmailNoPassword() throws InterruptedException {
+    public void loginWithValidEmailNoPassword() {
 
 
         //Step 1
@@ -70,7 +70,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test (dataProvider = "IncorrectLoginData", dataProviderClass = TestDataProvider.class)
-    public void negativeLoginTest (String email, String password) throws InterruptedException {
+    public void negativeLoginTest (String email, String password) {
         String expectedURL = "https://qa.koel.app/";
 
         provideEmail(email);
