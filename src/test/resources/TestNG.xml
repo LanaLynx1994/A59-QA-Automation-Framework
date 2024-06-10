@@ -11,6 +11,9 @@
             <class name="Homework16Test"/>
             <class name="ProfileTests"/>
             <class name="Homework18"/>
+            <class name="CreatePlaylist"/>
+            <class name="Homework17"/>
+            <class name="Homework20aka19"/>
         </classes>
     </test>
 </suite>

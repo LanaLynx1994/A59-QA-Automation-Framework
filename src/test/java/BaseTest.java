@@ -31,7 +31,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String baseURL) throws InterruptedException {
+    public void launchBrowser(String baseURL){
         //      Added ChromeOptions argument below to fix websocket error
 
         options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
@@ -51,21 +51,20 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void navigateToPage(String url) throws InterruptedException {
+    public void navigateToPage(String url) {
 
         driver.get(url);
-        Thread.sleep(2000);
+
     }
 
-    public void provideEmail(String email) throws InterruptedException {
+    public void provideEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
        // WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
-       // Thread.sleep(2000);
     }
 
-    public void providePassword(String password) throws InterruptedException {
+    public void providePassword(String password) {
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
        // WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
@@ -73,7 +72,7 @@ public class BaseTest {
         //Thread.sleep(2000);
     }
 
-    public void clickSubmit() throws InterruptedException {
+    public void clickSubmit(){
         WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
        // WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();

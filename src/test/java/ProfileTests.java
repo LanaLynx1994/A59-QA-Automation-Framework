@@ -17,6 +17,7 @@ public class ProfileTests extends BaseTest {
         navigateToProfilePage();
         String uniqueName = generateUniqueName();
         changeName(uniqueName);
+        Thread.sleep(2000); // cannot remove - test fails
         String profileName = getProfileName();
         Assert.assertEquals(profileName, uniqueName);
 
@@ -33,38 +34,36 @@ public class ProfileTests extends BaseTest {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    private void changeName(String name) throws InterruptedException {
+    private void changeName(String name) {
         provideCurrentPassword("nTtAZKUq");
         enterNewName(name);
         saveChanges();
 
     }
 
-    private void saveChanges() throws InterruptedException {
+    private void saveChanges()  {
+       // WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("btn-submit")));
         WebElement saveButton = driver.findElement(By.className("btn-submit"));
         saveButton.click();
-        Thread.sleep(2000);
     }
 
-    private void navigateToProfilePage() throws InterruptedException {
-        WebElement profileName = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
-        //WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
+    private void navigateToProfilePage() {
+        WebElement profileName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.name")));
         //WebElement profileName = driver.findElement(By.cssSelector("span.name"));
         profileName.click();
-        //Thread.sleep(2000);
 
     }
 
-    private void enterNewName(String name) throws InterruptedException {
-        WebElement newName = driver.findElement(By.id("inputProfileName"));
+    private void enterNewName(String name)  {
+        WebElement newName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputProfileName")));
+        //WebElement newName = driver.findElement(By.id("inputProfileName"));
         newName.clear();
         newName.sendKeys(name);
-        Thread.sleep(2000);
     }
-    private void provideCurrentPassword(String password) throws InterruptedException {
-        WebElement currentPassword = driver.findElement(By.id("inputProfileCurrentPassword"));
+    private void provideCurrentPassword(String password) {
+        WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputProfileCurrentPassword")));
+        //WebElement currentPassword = driver.findElement(By.id("inputProfileCurrentPassword"));
         currentPassword.clear();
         currentPassword.sendKeys(password);
-        Thread.sleep(2000);
     }
 }
