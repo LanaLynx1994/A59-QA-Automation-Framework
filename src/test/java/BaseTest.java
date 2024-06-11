@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -19,6 +20,8 @@ public class BaseTest {
   //String url = "https://qa.koel.app/";
     WebDriverWait wait;
     Wait<WebDriver> fluentWait;
+
+    Actions actions;
 
 
 
@@ -44,6 +47,7 @@ public class BaseTest {
               .withTimeout(Duration.ofSeconds(5))
               .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
       navigateToPage(baseURL);
+      actions = new Actions(driver);
     }
     @AfterMethod
     public void clearBrowser(){
