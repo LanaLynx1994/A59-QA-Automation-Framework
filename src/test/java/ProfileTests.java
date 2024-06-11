@@ -8,16 +8,17 @@ import java.util.UUID;
 
 public class ProfileTests extends BaseTest {
     @Test
-    public void changeProfileName() throws InterruptedException {
+    public void changeProfileName() {
         //navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        Thread.sleep(2000); // cannot remove - test fails
-        navigateToProfilePage();
+        wait.until(ExpectedConditions.urlContains(".app/#!/home"));
+        driver.get("https://qa.koel.app/#!/profile");
+        driver.navigate().refresh();
         String uniqueName = generateUniqueName();
         changeName(uniqueName);
-        Thread.sleep(2000); // cannot remove - test fails
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         String profileName = getProfileName();
         Assert.assertEquals(profileName, uniqueName);
 
@@ -45,13 +46,6 @@ public class ProfileTests extends BaseTest {
        // WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("btn-submit")));
         WebElement saveButton = driver.findElement(By.className("btn-submit"));
         saveButton.click();
-    }
-
-    private void navigateToProfilePage() {
-        WebElement profileName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span.name")));
-        //WebElement profileName = driver.findElement(By.cssSelector("span.name"));
-        profileName.click();
-
     }
 
     private void enterNewName(String name)  {
