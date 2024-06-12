@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class Homework17 extends BaseTest{
-    @Test
+    @Test(dependsOnMethods = "CreatePlaylist.createPlaylist")
     public void addSongToPlaylist() {
       //  navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");

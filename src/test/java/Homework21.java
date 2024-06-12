@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest{
     String newPlaylistName = "B play";
-    @Test
+    @Test(dependsOnMethods = "Homework17.addSongToPlaylist")
     public void renamePlaylist() {
         String updatedPlaylistMessage = "Updated playlist \"B play.\"";
 
