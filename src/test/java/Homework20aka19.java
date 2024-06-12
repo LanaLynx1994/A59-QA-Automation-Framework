@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework20aka19 extends BaseTest{
-    @Test
+    @Test(dependsOnMethods = "Homework21.renamePlaylist")
     public void deletePlaylist() {
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
@@ -19,13 +19,13 @@ public class Homework20aka19 extends BaseTest{
     private void verifyPlaylistDeleted() {
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         String actualMessage = notification.getText();
-        String expectedMessage = "Deleted playlist \"A play.\"";
+        String expectedMessage = "Deleted playlist \"B play.\"";
         Assert.assertEquals(actualMessage, expectedMessage);
 
     }
 
     private void confirmDeletePlaylist(){
-        WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.ok")));
+        WebElement okButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
        // WebElement okButton = driver.findElement(By.cssSelector("button.ok"));
         okButton.click();
     }
