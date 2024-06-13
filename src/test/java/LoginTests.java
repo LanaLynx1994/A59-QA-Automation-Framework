@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
@@ -22,8 +24,17 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword(){
 
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-       // navigateToPage();
+       // loginPage.provideEmail("sviatlana.rysiavets@testpro.io");
+       // loginPage.providePassword("nTtAZKUq");
+       // loginPage.clickSubmit(); SHORTER:
+
+        loginPage.login();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
+      /* // navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
@@ -31,11 +42,11 @@ public class LoginTests extends BaseTest {
         WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
         //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         //Assertions - Expected vs Actual
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        Assert.assertTrue(avatarIcon.isDisplayed());*/
     }
 
     // Not so happy Path - Negative Test case
-  //  @Test
+   //@Test
     public void loginWithInvalidEmailValidPassword() {
 
         //Step 1
@@ -53,7 +64,7 @@ public class LoginTests extends BaseTest {
     }
 
     // Not so Happy path - Login Test
-   // @Test
+    //@Test
     public void loginWithValidEmailNoPassword() {
 
 
