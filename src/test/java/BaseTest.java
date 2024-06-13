@@ -15,13 +15,13 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver = null;
-    ChromeOptions options = new ChromeOptions();
+    public static WebDriver driver = null;
+    public ChromeOptions options = new ChromeOptions();
   //String url = "https://qa.koel.app/";
-    WebDriverWait wait;
-    Wait<WebDriver> fluentWait;
+    public static WebDriverWait wait = null;
+    public Wait<WebDriver> fluentWait;
 
-    Actions actions;
+    public static Actions actions = null;
 
 
 
