@@ -9,8 +9,11 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
     By userAvatarIcon = By.cssSelector("img[class='avatar']");
+    By soundBarVisualiser = By.cssSelector("[data-testid='sound-bar-play']");
+
 public WebElement getUserAvatar(){
     return findElement(userAvatarIcon);
 }
+public WebElement getSoundBarVisualiser(){return findElement(soundBarVisualiser);}
 
 }

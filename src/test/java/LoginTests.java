@@ -32,6 +32,7 @@ public class LoginTests extends BaseTest {
        // loginPage.clickSubmit(); SHORTER:
 
         loginPage.login();
+
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
       /* // navigateToPage();

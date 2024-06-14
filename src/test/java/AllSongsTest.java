@@ -1,3 +1,6 @@
+import Pages.AllSongsPage;
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,37 +11,52 @@ public class AllSongsTest extends BaseTest{
 
     @Test
     public void playSongWithRightClick(){
-        provideEmail("sviatlana.rysiavets@testpro.io");
-        providePassword("nTtAZKUq");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+
+        loginPage.login();
+        allSongsPage.navigateToChooseAllSongs();
+        allSongsPage.contextClickFirstSong();
+        allSongsPage.contextPlayOption();
+        Assert.assertTrue(homePage.getSoundBarVisualiser().isDisplayed());
+//        isSongPlaying();
+//        Assert.assertTrue(isSongPlaying());
+
+
+    }
+
+
+
+       // provideEmail("sviatlana.rysiavets@testpro.io");
+       // providePassword("nTtAZKUq");
+       // clickSubmit();
         //Navigate to All Songs Page
-        navigateToChooseAllSongs();
+       // navigateToChooseAllSongs();
         //Right/Context Click on the first song
-        contextClickFirstSong();
+        //contextClickFirstSong();
         //Choose play from context menu
-        choosePlayOption();
+        //choosePlayOption();
         //Verify song is playing
-        isSongPlaying();
-        Assert.assertTrue(isSongPlaying());
 
-    }
 
-    private boolean isSongPlaying() {
-        WebElement soundBarVisualiser = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
-        return soundBarVisualiser.isDisplayed();
-    }
+//   private boolean isSongPlaying() {
+//
+//        WebElement soundBarVisualiser = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
+//        return soundBarVisualiser.isDisplayed();
+  //  }
+//
+//    private void choosePlayOption() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playback"))).click();
+//    }
 
-    private void choosePlayOption() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playback"))).click();
-    }
+//    private void contextClickFirstSong() {
+//       WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+//       actions.contextClick(firstSongElement).perform();
+//    }
 
-    private void contextClickFirstSong() {
-       WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
-       actions.contextClick(firstSongElement).perform();
-    }
+   // private void navigateToChooseAllSongs() {
+     //   wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
 
-    private void navigateToChooseAllSongs() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
-
-    }
+   // }
 }
