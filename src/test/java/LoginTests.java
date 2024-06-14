@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
   //  @Test
-    public void loginEmptyEmailPassword() throws InterruptedException {
+    public void loginEmptyEmailPassword() {
        // navigateToPage();
         String expectedURL = "https://qa.koel.app/";
         Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
@@ -32,6 +32,7 @@ public class LoginTests extends BaseTest {
        // loginPage.clickSubmit(); SHORTER:
 
         loginPage.login();
+
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
       /* // navigateToPage();
