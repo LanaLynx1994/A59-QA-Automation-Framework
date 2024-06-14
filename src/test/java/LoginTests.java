@@ -1,13 +1,6 @@
-import Pages.HomePage;
-import Pages.LoginPage;
-import org.openqa.selenium.By;
+import pages.HomePage;
+import pages.LoginPage;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

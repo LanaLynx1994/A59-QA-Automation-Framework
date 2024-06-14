@@ -1,9 +1,6 @@
-import Pages.AllSongsPage;
-import Pages.HomePage;
-import Pages.LoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.AllSongsPage;
+import pages.HomePage;
+import pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
