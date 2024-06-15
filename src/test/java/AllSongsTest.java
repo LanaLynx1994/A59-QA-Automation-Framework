@@ -1,4 +1,5 @@
 import pages.AllSongsPage;
+import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 import org.testng.Assert;
@@ -11,12 +12,13 @@ public class AllSongsTest extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
+        BasePage basePage = new BasePage(driver);
 
         loginPage.login();
-        allSongsPage.navigateToChooseAllSongs();
+        basePage.navigateToChooseAllSongs();
         allSongsPage.contextClickFirstSong();
-        allSongsPage.contextPlayOption();
-        Assert.assertTrue(homePage.getSoundBarVisualiser().isDisplayed());
+        allSongsPage.choosePlayFromContext();
+        Assert.assertTrue(basePage.getSoundBarVisualiser().isDisplayed());
 //        isSongPlaying();
 //        Assert.assertTrue(isSongPlaying());
 
