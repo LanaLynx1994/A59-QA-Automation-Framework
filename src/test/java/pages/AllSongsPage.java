@@ -10,18 +10,15 @@ public class AllSongsPage extends BasePage{
         super(givenDriver);
     }
 
-    By chooseAllSongs = By.cssSelector("li a.songs");
+
     By firstSong = By.cssSelector(".all-songs tr.song-item:nth-child(1)");
     By contextPlay = By.cssSelector("li.playback");
 
-    public void navigateToChooseAllSongs(){
-        findElement(chooseAllSongs).click();
-    }
+
     public void contextClickFirstSong(){
-        WebElement firstSongElement = findElement(firstSong);
-        actions.contextClick(firstSongElement).perform();
+        actions.contextClick(findElement(firstSong)).perform();
     }
-    public void contextPlayOption(){
+    public void choosePlayFromContext(){
         findElement(contextPlay).click();
     }
 

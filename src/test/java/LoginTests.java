@@ -1,5 +1,8 @@
 import pages.HomePage;
-import pages.LoginPage;
+//import pages.LoginPage;
+import pageFactory.LoginPage;
+import pageFactory.BasePage;
+//import pageFactory.HomePage;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,7 +27,10 @@ public class LoginTests extends BaseTest {
        // loginPage.providePassword("nTtAZKUq");
        // loginPage.clickSubmit(); SHORTER:
 
-        loginPage.login();
+       // loginPage.login(); //Using pages package
+
+        //using pageFactory package:
+        loginPage.provideEmail("sviatlana.rysiavets@testpro.io").providePassword("nTtAZKUq").clickSubmit();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
