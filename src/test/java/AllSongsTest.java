@@ -18,7 +18,7 @@ public class AllSongsTest extends BaseTest{
         basePage.navigateToChooseAllSongs();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlayFromContext();
-        Assert.assertTrue(basePage.getSoundBarVisualiser().isDisplayed());
+        Assert.assertTrue(basePage.isSongPlaying());
 //        isSongPlaying();
 //        Assert.assertTrue(isSongPlaying());
 

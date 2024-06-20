@@ -1,8 +1,7 @@
-import pages.HomePage;
+//import pages.HomePage;
 //import pages.LoginPage;
-import pageFactory.LoginPage;
-import pageFactory.BasePage;
-//import pageFactory.HomePage;
+import pageFactory.LoginPageFactory;
+import pageFactory.HomePageFactory;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,8 +19,8 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword(){
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPageFactory loginPage = new LoginPageFactory(driver);
+        HomePageFactory homePage = new HomePageFactory(driver);
 
        // loginPage.provideEmail("sviatlana.rysiavets@testpro.io");
        // loginPage.providePassword("nTtAZKUq");
@@ -32,7 +31,7 @@ public class LoginTests extends BaseTest {
         //using pageFactory package:
         loginPage.provideEmail("sviatlana.rysiavets@testpro.io").providePassword("nTtAZKUq").clickSubmit();
 
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        Assert.assertTrue(homePage.isAvatarDisplayed());
 
       /* // navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");
