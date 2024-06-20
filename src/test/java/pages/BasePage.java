@@ -11,9 +11,9 @@ import java.time.Duration;
 
 public class BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
+   protected WebDriver driver;
+   protected WebDriverWait wait;
+   protected Actions actions;
 
     public BasePage (WebDriver givenDriver){
         driver = givenDriver;
@@ -24,7 +24,8 @@ public class BasePage {
     By chooseAllSongs = By.cssSelector("li a.songs");
     By soundBarVisualiser = By.cssSelector("[data-testid='sound-bar-play']");
 
-    public WebElement getSoundBarVisualiser(){return findElement(soundBarVisualiser);}
+    public boolean isSongPlaying(){
+        return findElement(soundBarVisualiser).isDisplayed();}
 
     public void navigateToChooseAllSongs() {
         findElement(chooseAllSongs).click();
@@ -36,5 +37,9 @@ public class BasePage {
 
     public WebElement findElementIfClickable(By locator){
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void click(By locator){
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 }

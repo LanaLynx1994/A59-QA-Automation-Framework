@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage {
+public class LoginPageFactory extends BasePageFactory {
 
     //Constructor
-    public LoginPage(WebDriver givenDriver) {
+    public LoginPageFactory(WebDriver givenDriver) {
         super(givenDriver);
     }
 
@@ -25,21 +25,21 @@ public class LoginPage extends BasePage {
 
 
 
-    //Page Methods
-    public LoginPage provideEmail(String email){
+    //Page Factory Methods
+    public LoginPageFactory provideEmail(String email){
 
         emailField.sendKeys(email);
         return this;
         //findElement(emailField).sendKeys(email);
     }
-    public LoginPage providePassword(String password){
+    public LoginPageFactory providePassword(String password){
 
         passwordField.sendKeys(password);
         return this;
 
         //findElement(passwordField).sendKeys(password);
     }
-    public LoginPage clickSubmit(){
+    public LoginPageFactory clickSubmit(){
 
         submitBtn.click();
         return this;
