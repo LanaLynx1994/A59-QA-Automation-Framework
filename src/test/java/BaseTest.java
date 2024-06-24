@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -70,6 +72,10 @@ public class BaseTest {
             case "firefox": //gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
+            case "safari": //gradle clean test -Dbrowser=safari
+                WebDriverManager.safaridriver().setup();
+                SafariOptions safariOptions = new SafariOptions();
+               return driver = new SafariDriver();
             case "MicrosoftEdge": //gradle clean test -Dbrowser=MicrosoftEdge
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
@@ -85,6 +91,9 @@ public class BaseTest {
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-chrome": //gradle clean test -Dbrowser=grid-chrome
                 caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-safari": //gradle clean test -Dbrowser=grid-safari
+                caps.setCapability("browserName", "safari");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
             default: //gradle clean test
