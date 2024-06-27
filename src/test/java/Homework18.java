@@ -10,6 +10,7 @@ public class Homework18 extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         clickPlayNextSong();
         clickPlayBtn();
         validateSongIsPlaying();

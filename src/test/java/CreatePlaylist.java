@@ -11,6 +11,7 @@ public class CreatePlaylist extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         clickCreateNewPlaylist();
         chooseNewPlaylist();
         enterPlaylistName("A play");

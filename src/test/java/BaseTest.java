@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -71,6 +72,10 @@ public class BaseTest {
         switch (browser){
             case "firefox": //gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless", "--disable-gpu", "-private");
+              //  FirefoxProfile firefoxProfile = new FirefoxProfile();
+               // firefoxProfile.setPreference("dom.webnotifications.enabled", false);
                 return driver = new FirefoxDriver();
             case "safari": //gradle clean test -Dbrowser=safari
                 WebDriverManager.safaridriver().setup();
