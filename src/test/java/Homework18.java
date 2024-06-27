@@ -24,7 +24,7 @@ public class Homework18 extends BaseTest{
     }
 
     private void clickPlayBtn() {
-        WebElement playBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Play or resume']")));
+        WebElement playBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Play or resume']")));
         //WebElement playBtn = driver.findElement(By.cssSelector("[title='Play or resume']"));
         playBtn.click();
     }
