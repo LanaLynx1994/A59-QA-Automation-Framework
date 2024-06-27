@@ -1,3 +1,5 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.AllSongsPage;
 import pages.BasePage;
 import pages.HomePage;
@@ -15,6 +17,7 @@ public class AllSongsTest extends BaseTest{
         BasePage basePage = new BasePage(driver);
 
         loginPage.login();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); // for firefox
         basePage.navigateToChooseAllSongs();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlayFromContext();

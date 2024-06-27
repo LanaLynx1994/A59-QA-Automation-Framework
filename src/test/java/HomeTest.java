@@ -26,6 +26,7 @@ public class HomeTest extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         //Choose a Playlist by name
         choosePlaylistByName("TestPro playlist");
         //DisplayAllSongs
