@@ -37,7 +37,7 @@ public class LoginStepDefinition {
         driver.quit();
     }
 
-    @And("I open Koel Login Page")
+    @Given("I open Koel Login Page")
     public void iOpenKoelLoginPage() {
         driver.get("https://qa.koel.app/");
     }
