@@ -21,8 +21,10 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword(){
 
-        LoginPageFactory loginPage = new LoginPageFactory(driver);
-        HomePageFactory homePage = new HomePageFactory(driver);
+//        LoginPageFactory loginPage = new LoginPageFactory(driver);
+//        HomePageFactory homePage = new HomePageFactory(driver);
+        LoginPageFactory loginPage = new LoginPageFactory(getDriver());
+        HomePageFactory homePage = new HomePageFactory(getDriver());
 
        // loginPage.provideEmail("sviatlana.rysiavets@testpro.io");
        // loginPage.providePassword("nTtAZKUq");
@@ -88,7 +90,8 @@ public class LoginTests extends BaseTest {
         provideEmail(email);
         providePassword(password);
         clickSubmit();
-        Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+       // Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+        Assert.assertEquals(getDriver().getCurrentUrl(), expectedURL);
     }
 
 }

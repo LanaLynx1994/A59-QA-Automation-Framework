@@ -35,7 +35,11 @@ public class BaseTest {
 
     public static Actions actions = null;
 
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
 
     @BeforeSuite
     static void setupClass() {
@@ -47,23 +51,34 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
+//    public void launchBrowser(String baseURL) throws MalformedURLException {
+//        //      Added ChromeOptions argument below to fix websocket error
+//
+//       // options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+//      //  options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+//
+//        driver = pickBrowser(System.getProperty("browser"));
+//      //driver = new ChromeDriver(options);
+//       // driver = new FirefoxDriver(options);
+//      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//      driver.manage().window().maximize();
+//      wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//      fluentWait = new FluentWait<WebDriver>(driver)
+//              .withTimeout(Duration.ofSeconds(5))
+//              .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
+//      navigateToPage(baseURL);
+//      actions = new Actions(driver);
+//    }
     public void launchBrowser(String baseURL) throws MalformedURLException {
-        //      Added ChromeOptions argument below to fix websocket error
 
-       // options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
-      //  options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
-        driver = pickBrowser(System.getProperty("browser"));
-      //driver = new ChromeDriver(options);
-       // driver = new FirefoxDriver(options);
-      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-      driver.manage().window().maximize();
-      wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-      fluentWait = new FluentWait<WebDriver>(driver)
-              .withTimeout(Duration.ofSeconds(5))
-              .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
-      navigateToPage(baseURL);
-      actions = new Actions(driver);
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        fluentWait = new FluentWait<WebDriver>(getDriver())
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
+        navigateToPage(baseURL);
     }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -110,9 +125,13 @@ public class BaseTest {
         }
     }
     @AfterMethod
-    public void clearBrowser(){
-
-        driver.quit();
+//    public void clearBrowser(){
+//
+//        driver.quit();
+//    }
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 
     public void navigateToPage(String url) {
