@@ -22,7 +22,7 @@ public class LoginStepDefinition {
     WebDriver driver;
     WebDriverWait wait;
 
-    @Before("I open browser")
+    @Before
     public void openBrowser(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -32,32 +32,28 @@ public class LoginStepDefinition {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @After
-    public void closeBrowser(){
-        driver.quit();
-    }
-
-    @Given("I open Koel Login Page")
+    @And("I open Koel Login Page")
     public void iOpenKoelLoginPage() {
-        driver.get("https://qa.koel.app/");
+        driver.get("https://qa.koel.app");
     }
 
     @When("I enter email {string}")
     public void iEnterEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']"))).clear();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']"))).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']"))).clear();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']"))).sendKeys(email);
+
     }
 
     @And("I enter password {string}")
     public void iEnterPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']"))).clear();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']"))).sendKeys(password);
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']"))).clear();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']"))).sendKeys(password);
     }
 
     @And("I click submit")
     public void iClickSubmit() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='submit']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']"))).click();
+
     }
 
     @Then("I should be logged in")
@@ -65,5 +61,8 @@ public class LoginStepDefinition {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
     }
 
-
+    @After
+    public void closeBrowser(){
+        driver.quit();
+    }
 }

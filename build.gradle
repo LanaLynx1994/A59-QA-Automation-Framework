@@ -45,8 +45,8 @@ test {
         }
     }
     task testCucumber(type: Test) {
-    useTestNG() {
-        suites "src/test/resources/Cucumber.xml"
-        systemProperty "browser", System.getProperty("browser")
+        useTestNG() {
+            suites "src/test/resources/Cucumber.xml"
+            systemProperty "browser", System.getProperty("browser")
     }
 }
