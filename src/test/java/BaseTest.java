@@ -136,7 +136,8 @@ public class BaseTest {
 
     public void navigateToPage(String url) {
 
-        driver.get(url);
+       // driver.get(url);
+        getDriver().get(url);
 
     }
 
