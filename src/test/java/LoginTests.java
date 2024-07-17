@@ -1,5 +1,8 @@
 //import pages.HomePage;
 //import pages.LoginPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageFactory.LoginPageFactory;
 import pageFactory.HomePageFactory;
 
@@ -17,12 +20,28 @@ public class LoginTests extends BaseTest {
 
     }
 
+    @Test
+    public void registrationNavigation(){
+        WebElement registrationLink = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='registration']")));
+        // WebElement registrationLink = driver.findElement(By.cssSelector("a[href='registration']"));
+        registrationLink.click();
+        String registrationPageUrl = "https://qa.koel.app/registration";
+       // String actualUrl = driver.getCurrentUrl();
+        String actualUrl = getDriver().getCurrentUrl();
+        Assert.assertEquals(registrationPageUrl, actualUrl);
+
+    }
+
     // Happy path - Login Test
     @Test
     public void loginValidEmailPassword(){
-
+/*
         LoginPageFactory loginPage = new LoginPageFactory(driver);
         HomePageFactory homePage = new HomePageFactory(driver);
+
+ */
+        LoginPageFactory loginPage = new LoginPageFactory(getDriver());
+        HomePageFactory homePage = new HomePageFactory(getDriver());
 
        // loginPage.provideEmail("sviatlana.rysiavets@testpro.io");
        // loginPage.providePassword("nTtAZKUq");
@@ -88,7 +107,8 @@ public class LoginTests extends BaseTest {
         provideEmail(email);
         providePassword(password);
         clickSubmit();
-        Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+        //Assert.assertEquals(driver.getCurrentUrl(), expectedURL);
+        Assert.assertEquals(getDriver().getCurrentUrl(), expectedURL);
     }
 
 }

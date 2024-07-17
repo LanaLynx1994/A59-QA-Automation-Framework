@@ -3,10 +3,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageFactory.LoginPageFactory;
 
 import java.util.UUID;
 
 public class ProfileTests extends BaseTest {
+
+    public void ChangeTheme(){
+
+        LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
+        loginPageFactory.login();
+        
+    }
     @Test
     public void changeProfileName() {
         //navigateToPage();

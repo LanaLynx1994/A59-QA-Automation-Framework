@@ -23,7 +23,9 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
     public static WebDriver driver = null;
@@ -35,6 +37,11 @@ public class BaseTest {
 
     public static Actions actions = null;
 
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
 
 
     @BeforeSuite
@@ -52,7 +59,7 @@ public class BaseTest {
 
        // options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
       //  options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
+/*
         driver = pickBrowser(System.getProperty("browser"));
       //driver = new ChromeDriver(options);
        // driver = new FirefoxDriver(options);
@@ -64,6 +71,16 @@ public class BaseTest {
               .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
       navigateToPage(baseURL);
       actions = new Actions(driver);
+       */
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        fluentWait = new FluentWait<WebDriver>(getDriver())
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(200)).ignoring(ElementNotInteractableException.class);
+        navigateToPage(baseURL);
+        actions = new Actions(getDriver());
     }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -100,6 +117,8 @@ public class BaseTest {
             case "grid-safari": //gradle clean test -Dbrowser=grid-safari
                 caps.setCapability("browserName", "safari");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud": //gradle clean test -Dbrowser=cloud
+                return lambdaTest();
 
             default: //gradle clean test
                 WebDriverManager.chromedriver().setup();
@@ -110,14 +129,22 @@ public class BaseTest {
         }
     }
     @AfterMethod
+    /*
     public void clearBrowser(){
 
         driver.quit();
     }
 
+     */
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
+    }
+
     public void navigateToPage(String url) {
 
-        driver.get(url);
+       // driver.get(url);
+        getDriver().get(url);
 
     }
 
@@ -141,5 +168,26 @@ public class BaseTest {
        // WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
       // Thread.sleep(2000);
+    }
+
+    public static WebDriver lambdaTest() throws MalformedURLException{
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", "chrome");
+//        capabilities.setCapability("browserVersion", "119.0");
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("125");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "sviatlana.rysiavets");
+        ltOptions.put("accessKey", "RYfz2pWeIPjaXK1cYltFcmApJ2gHGmuB2zC9wY9etQOalXyntB");
+        ltOptions.put("build", "TestProBuild");
+        ltOptions.put("project", "CloudExecution");
+        ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 }

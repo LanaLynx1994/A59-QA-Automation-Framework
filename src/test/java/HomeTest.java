@@ -11,6 +11,37 @@ import java.util.List;
 
 public class HomeTest extends BaseTest{
 
+    @Test
+    public void playSong() throws InterruptedException {
+        //  navigateToPage();
+        provideEmail("sviatlana.rysiavets@testpro.io");
+        providePassword("nTtAZKUq");
+        clickSubmit();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
+        clickPlayNextSong();
+        clickPlayBtn();
+        validateSongIsPlaying();
+
+    }
+
+    private void validateSongIsPlaying() {
+        WebElement pauseBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Pause']")));
+        // WebElement pauseBtn = driver.findElement(By.cssSelector("[title='Pause']"));
+        pauseBtn.isDisplayed();
+    }
+
+    private void clickPlayBtn() {
+        WebElement playBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Play or resume']")));
+        //WebElement playBtn = driver.findElement(By.cssSelector("[title='Play or resume']"));
+        playBtn.click();
+    }
+
+    private void clickPlayNextSong() {
+        WebElement playNextSongBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Play next song']")));
+        //WebElement playNextSongBtn = driver.findElement(By.cssSelector("[title='Play next song']"));
+        playNextSongBtn.click();
+    }
+
 
     @Test
     public void HoverOverPlayButtonAndPlaySong(){
@@ -67,4 +98,79 @@ public class HomeTest extends BaseTest{
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
+
+    @Test(dependsOnMethods = "HomeTest.renamePlaylist")
+    public void deletePlaylist() {
+        provideEmail("sviatlana.rysiavets@testpro.io");
+        providePassword("nTtAZKUq");
+        clickSubmit();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
+        clickPlaylist();
+        clickDeletePlaylist();
+        confirmDeletePlaylist();
+        verifyPlaylistDeleted();
+    }
+
+    private void verifyPlaylistDeleted() {
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        String actualMessage = notification.getText();
+        String expectedMessage = "Deleted playlist \"B play.\"";
+        Assert.assertEquals(actualMessage, expectedMessage);
+
+    }
+
+    private void confirmDeletePlaylist(){
+        WebElement okButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
+        // WebElement okButton = driver.findElement(By.cssSelector("button.ok"));
+        okButton.click();
+    }
+
+    private void clickDeletePlaylist() {
+        WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Delete this playlist']")));
+        // WebElement deletePlaylistButton = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
+        deletePlaylistButton.click();
+    }
+
+    private void clickPlaylist(){
+        WebElement choosePlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists li:nth-child(3)")));
+        //WebElement choosePlaylist = driver.findElement(By.cssSelector("#playlists li:nth-child(3)"));
+        choosePlaylist.click();
+    }
+
+    String newPlaylistName = "B play";
+    @Test(dependsOnMethods = "AllSongsTest.addSongToPlaylist")
+    public void renamePlaylist() {
+        String updatedPlaylistMessage = "Updated playlist \"B play.\"";
+
+        provideEmail("sviatlana.rysiavets@testpro.io");
+        providePassword("nTtAZKUq");
+        clickSubmit();
+        //double click on playlist name
+        doubleClickPlaylist();
+        //enter new Name
+        enterNewName();
+        Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMessage);
+
+    }
+
+    //Helper Methods
+    public String getRenamePlaylistSuccessMsg(){
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
+    }
+
+    public void enterNewName() {
+        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        //clear() does not work, element has an attribute of 'required'
+        //workaround is Ctrl A (to select all) then backspace to clear then replace with new playlist name
+        playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+
+        playlistInputField.sendKeys(newPlaylistName);
+        playlistInputField.sendKeys(Keys.ENTER);
+    }
+    public void doubleClickPlaylist(){
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        actions.doubleClick(playlist).perform();
+    }
+
 }
