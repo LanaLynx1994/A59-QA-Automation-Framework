@@ -17,7 +17,7 @@ public class HomeTest extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
+       // wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         clickPlayNextSong();
         clickPlayBtn();
         validateSongIsPlaying();
@@ -104,7 +104,7 @@ public class HomeTest extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         clickPlaylist();
         clickDeletePlaylist();
         confirmDeletePlaylist();
@@ -127,13 +127,11 @@ public class HomeTest extends BaseTest{
 
     private void clickDeletePlaylist() {
         WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Delete this playlist']")));
-        // WebElement deletePlaylistButton = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
         deletePlaylistButton.click();
     }
 
     private void clickPlaylist(){
         WebElement choosePlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists li:nth-child(3)")));
-        //WebElement choosePlaylist = driver.findElement(By.cssSelector("#playlists li:nth-child(3)"));
         choosePlaylist.click();
     }
 
@@ -145,9 +143,7 @@ public class HomeTest extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        //double click on playlist name
         doubleClickPlaylist();
-        //enter new Name
         enterNewName();
         Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMessage);
 
@@ -164,7 +160,6 @@ public class HomeTest extends BaseTest{
         //clear() does not work, element has an attribute of 'required'
         //workaround is Ctrl A (to select all) then backspace to clear then replace with new playlist name
         playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }

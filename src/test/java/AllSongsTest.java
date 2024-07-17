@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class AllSongsTest extends BaseTest{
 
-    @Test(dependsOnMethods = "CreatePlaylist.createPlaylist")
+    @Test(dependsOnMethods = "PlaylistTests.createPlaylist")
     public void addSongToPlaylist() {
         //  navigateToPage();
         provideEmail("sviatlana.rysiavets@testpro.io");

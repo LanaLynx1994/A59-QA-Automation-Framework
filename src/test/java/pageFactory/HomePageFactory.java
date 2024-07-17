@@ -11,8 +11,6 @@ public class HomePageFactory extends BasePageFactory {
     }
     @FindBy(css="img[class='avatar']")
     WebElement userAvatarIcon;
-   // By userAvatarIcon = By.cssSelector("img[class='avatar']");
-
 
     public boolean isAvatarDisplayed(){
 

@@ -36,7 +36,6 @@ public class LoginPageFactory extends BasePageFactory {
 
         passwordField.sendKeys(password);
         return this;
-
         //findElement(passwordField).sendKeys(password);
     }
     public LoginPageFactory clickSubmit(){

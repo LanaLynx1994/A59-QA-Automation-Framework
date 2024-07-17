@@ -21,15 +21,12 @@ public class BasePageFactory {
         return threadDriver.get();
     }
 
-
-
     public BasePageFactory(WebDriver givenDriver){
         /*
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this); //new PageFactory
-
          */
         threadDriver.set(givenDriver);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
@@ -41,8 +38,6 @@ public class BasePageFactory {
     WebElement chooseAllSongs;
     @FindBy(css="[data-testid='sound-bar-play']")
     WebElement soundBarVisualiser;
-    //By chooseAllSongs = By.cssSelector("li a.songs");
-    //By soundBarVisualiser = By.cssSelector("[data-testid='sound-bar-play']");
 
     public WebElement findElement(WebElement webElement) {
         return wait.until(ExpectedConditions.visibilityOf(webElement));

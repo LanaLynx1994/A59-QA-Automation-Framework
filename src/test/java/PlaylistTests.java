@@ -5,13 +5,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CreatePlaylist extends BaseTest{
+public class PlaylistTests extends BaseTest{
     @Test
     public void createPlaylist(){
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         clickCreateNewPlaylist();
         chooseNewPlaylist();
         enterPlaylistName("A play");

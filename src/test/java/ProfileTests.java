@@ -4,15 +4,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageFactory.LoginPageFactory;
+import pageFactory.ProfilePageFactory;
 
 import java.util.UUID;
 
 public class ProfileTests extends BaseTest {
 
-    public void ChangeTheme(){
+    @Test
+    public void ChangeThemeToOak(){
 
         LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
+        ProfilePageFactory profilePageFactory = new ProfilePageFactory(driver);
+
         loginPageFactory.login();
+        wait.until(ExpectedConditions.urlContains(".app/#!/home"));
+        driver.get("https://qa.koel.app/#!/profile");
+        driver.navigate().refresh();
+        profilePageFactory.selectOakTheme();
+        Assert.assertTrue(profilePageFactory.isOakThemeSelected());
         
     }
     @Test
@@ -35,7 +44,6 @@ public class ProfileTests extends BaseTest {
 
     private String getProfileName() {
         WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.name")));
-       // WebElement profileName = driver.findElement(By.cssSelector("span.name"));
         return profileName.getText();
     }
 
@@ -51,20 +59,17 @@ public class ProfileTests extends BaseTest {
     }
 
     private void saveChanges()  {
-       // WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("btn-submit")));
         WebElement saveButton = driver.findElement(By.className("btn-submit"));
         saveButton.click();
     }
 
     private void enterNewName(String name)  {
         WebElement newName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputProfileName")));
-        //WebElement newName = driver.findElement(By.id("inputProfileName"));
         newName.clear();
         newName.sendKeys(name);
     }
     private void provideCurrentPassword(String password) {
         WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputProfileCurrentPassword")));
-        //WebElement currentPassword = driver.findElement(By.id("inputProfileCurrentPassword"));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
