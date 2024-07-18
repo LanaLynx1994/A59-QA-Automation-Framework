@@ -11,6 +11,11 @@ import java.util.List;
 
 public class HomeTest extends BaseTest{
 
+    private boolean isMac() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        return osName.contains("mac");
+    }
+
     @Test
     public void playSong() throws InterruptedException {
         //  navigateToPage();
@@ -26,19 +31,16 @@ public class HomeTest extends BaseTest{
 
     private void validateSongIsPlaying() {
         WebElement pauseBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Pause']")));
-        // WebElement pauseBtn = driver.findElement(By.cssSelector("[title='Pause']"));
         pauseBtn.isDisplayed();
     }
 
     private void clickPlayBtn() {
         WebElement playBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Play or resume']")));
-        //WebElement playBtn = driver.findElement(By.cssSelector("[title='Play or resume']"));
         playBtn.click();
     }
 
     private void clickPlayNextSong() {
         WebElement playNextSongBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Play next song']")));
-        //WebElement playNextSongBtn = driver.findElement(By.cssSelector("[title='Play next song']"));
         playNextSongBtn.click();
     }
 
@@ -57,10 +59,8 @@ public class HomeTest extends BaseTest{
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
-        //Choose a Playlist by name
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); //for firefox
         choosePlaylistByName("TestPro playlist");
-        //DisplayAllSongs
         displayAllSongs();
         //Number of songs are equal to number of songs displayed in the info screen
         Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(songsCount())));
@@ -68,8 +68,6 @@ public class HomeTest extends BaseTest{
         //String 2 (songsCount()) = 4
         //Assert returns String 1.contains(String 2)
     }
-
-
 
     //Helper Methods
 
@@ -154,12 +152,16 @@ public class HomeTest extends BaseTest{
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notification.getText();
     }
-
     public void enterNewName() {
         WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         //clear() does not work, element has an attribute of 'required'
         //workaround is Ctrl A (to select all) then backspace to clear then replace with new playlist name
-        playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+        if (isMac()){
+            playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+        }
+        else {
+            playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        }
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }

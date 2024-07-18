@@ -38,12 +38,6 @@ test {
             systemProperty "browser", System.getProperty("browser")
         }
     }
-    task testPlayASong(type: Test) {
-        useTestNG() {
-            suites "src/test/resources/PlayASong.xml"
-            systemProperty "browser", System.getProperty("browser")
-        }
-    }
     task testCucumber(type: Test) {
         useTestNG() {
             suites "src/test/resources/Cucumber.xml"
