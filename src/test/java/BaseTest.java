@@ -70,12 +70,9 @@ public class BaseTest {
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://10.0.0.122:4444";
+        ChromeOptions chromeOptions = new ChromeOptions();
         switch (browser){
             case "chrome":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
-                chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 return driver = new ChromeDriver(chromeOptions);
             case "firefox": //gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
@@ -112,7 +109,6 @@ public class BaseTest {
 
             default: //gradle clean test
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 return driver = new ChromeDriver(chromeOptions);
