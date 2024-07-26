@@ -156,7 +156,6 @@ public class HomeTest extends BaseTest{
         //workaround is Ctrl A (to select all) then backspace to clear then replace with new playlist name
 
         playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }
