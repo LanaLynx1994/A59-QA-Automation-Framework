@@ -7,14 +7,12 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class HomeTest extends BaseTest{
 
-    private boolean isMac() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        return osName.contains("mac");
-    }
+
 
     @Test
     public void playSong() throws InterruptedException {
@@ -156,12 +154,9 @@ public class HomeTest extends BaseTest{
         WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         //clear() does not work, element has an attribute of 'required'
         //workaround is Ctrl A (to select all) then backspace to clear then replace with new playlist name
-        if (isMac()){
-            playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-        }
-        else {
-            playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
-        }
+
+        playlistInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }
