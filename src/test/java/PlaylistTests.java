@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class PlaylistTests extends BaseTest{
     @Test
-    public void createPlaylist(){
+    public void createPlaylist() throws InterruptedException {
         provideEmail("sviatlana.rysiavets@testpro.io");
         providePassword("nTtAZKUq");
         clickSubmit();
@@ -33,8 +33,9 @@ public class PlaylistTests extends BaseTest{
         newPlaylistInput.sendKeys(Keys.ENTER);
     }
 
-    private void chooseNewPlaylist() {
+    private void chooseNewPlaylist() throws InterruptedException {
         WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]")));
+        threadDriver.wait(100);
         newPlaylist.click();
     }
 
