@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class AllSongsPage extends BasePage{
     public AllSongsPage(WebDriver givenDriver) {
-
         super(givenDriver);
     }
 

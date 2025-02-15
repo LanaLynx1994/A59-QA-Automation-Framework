@@ -13,13 +13,13 @@ public class ProfileTests extends BaseTest {
     @Test
     public void ChangeThemeToOak(){
 
-        LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
-        ProfilePageFactory profilePageFactory = new ProfilePageFactory(driver);
+        LoginPageFactory loginPageFactory = new LoginPageFactory(getDriver());
+        ProfilePageFactory profilePageFactory = new ProfilePageFactory(getDriver());
 
         loginPageFactory.login();
         wait.until(ExpectedConditions.urlContains(".app/#!/home"));
-        driver.get("https://qa.koel.app/#!/profile");
-        driver.navigate().refresh();
+        getDriver().get("https://qa.koel.app/#!/profile");
+        getDriver().navigate().refresh();
         profilePageFactory.selectOakTheme();
         Assert.assertTrue(profilePageFactory.isOakThemeSelected());
         
@@ -31,8 +31,8 @@ public class ProfileTests extends BaseTest {
         providePassword("nTtAZKUq");
         clickSubmit();
         wait.until(ExpectedConditions.urlContains(".app/#!/home"));
-        driver.get("https://qa.koel.app/#!/profile");
-        driver.navigate().refresh();
+        getDriver().get("https://qa.koel.app/#!/profile");
+        getDriver().navigate().refresh();
         String uniqueName = generateUniqueName();
         changeName(uniqueName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
@@ -59,7 +59,7 @@ public class ProfileTests extends BaseTest {
     }
 
     private void saveChanges()  {
-        WebElement saveButton = driver.findElement(By.className("btn-submit"));
+        WebElement saveButton = getDriver().findElement(By.className("btn-submit"));
         saveButton.click();
     }
 

@@ -47,8 +47,8 @@ public class BaseTest {
     @BeforeSuite
     static void setupClass() {
 
-       // WebDriverManager.chromedriver().setup();
-       // WebDriverManager.firefoxdriver().setup();
+       WebDriverManager.chromedriver().setup();
+       WebDriverManager.firefoxdriver().setup();
 
     }
 
@@ -69,41 +69,41 @@ public class BaseTest {
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://10.0.0.122:4444";
+        String gridURL = "http://10.0.0.21:4444";
         ChromeOptions chromeOptions = new ChromeOptions();
         switch (browser){
             case "chrome":
-                return driver = new ChromeDriver(chromeOptions);
+                return new ChromeDriver(chromeOptions);
             case "firefox": //gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--headless", "--disable-gpu", "-private");
               //  FirefoxProfile firefoxProfile = new FirefoxProfile();
                // firefoxProfile.setPreference("dom.webnotifications.enabled", false);
-                return driver = new FirefoxDriver();
+                return new FirefoxDriver(firefoxOptions);
             case "safari": //gradle clean test -Dbrowser=safari
                 WebDriverManager.safaridriver().setup();
                 SafariOptions safariOptions = new SafariOptions();
-               return driver = new SafariDriver();
+               return new SafariDriver(safariOptions);
             case "MicrosoftEdge": //gradle clean test -Dbrowser=MicrosoftEdge
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
-                return driver = new EdgeDriver(edgeOptions);
+                return new EdgeDriver(edgeOptions);
 
                 //Grid Cases
             case "grid-edge": //gradle clean test -Dbrowser=grid-edge
                 caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-firefox": //gradle clean test -Dbrowser=grid-firefox
                 caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-chrome": //gradle clean test -Dbrowser=grid-chrome
                 caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-safari": //gradle clean test -Dbrowser=grid-safari
                 caps.setCapability("browserName", "safari");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "cloud": //gradle clean test -Dbrowser=cloud
                 return lambdaTest();
 
@@ -111,7 +111,7 @@ public class BaseTest {
                 WebDriverManager.chromedriver().setup();
                 chromeOptions.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-                return driver = new ChromeDriver(chromeOptions);
+                return new ChromeDriver(chromeOptions);
         }
     }
     @AfterMethod
@@ -126,6 +126,7 @@ public class BaseTest {
         threadDriver.remove();
     }
 
+    //Helper Methods:
     public void navigateToPage(String url) {
 
        // driver.get(url);

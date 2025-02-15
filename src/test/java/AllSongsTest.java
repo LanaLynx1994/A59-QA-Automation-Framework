@@ -60,13 +60,13 @@ public class AllSongsTest extends BaseTest{
 
     @Test
     public void playSongWithRightClick(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-        BasePage basePage = new BasePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongsPage = new AllSongsPage(getDriver());
+        BasePage basePage = new BasePage(getDriver());
 
         loginPage.login();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); // for firefox
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("overlay"))); // for firefox
         basePage.navigateToChooseAllSongs();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlayFromContext();

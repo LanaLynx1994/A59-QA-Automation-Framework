@@ -35,7 +35,7 @@ public class PlaylistTests extends BaseTest{
 
     private void chooseNewPlaylist() throws InterruptedException {
         WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]")));
-        threadDriver.wait(100);
+       // threadDriver.wait(100);
         newPlaylist.click();
     }
 
