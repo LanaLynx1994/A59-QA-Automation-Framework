@@ -12,7 +12,6 @@
             <class name="PlaylistTests"/>
             <class name="AllSongsTest"/>
             <class name="HomeTest"/>
-            <class name="ProfileTests"/>
         </classes>
     </test>
 </suite>

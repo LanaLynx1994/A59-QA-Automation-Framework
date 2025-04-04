@@ -15,22 +15,26 @@ public class BasePage {
    protected WebDriver driver;
    protected WebDriverWait wait;
    protected Actions actions;
-
+/*
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public static WebDriver getDriver() {
         return threadDriver.get();
+
+
     }
 
+ */
+
     public BasePage (WebDriver givenDriver){
-       /* driver = givenDriver;
+     driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
 
-        */
+        /*
         threadDriver.set(givenDriver);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         actions = new Actions(getDriver());
-
+*/
 
     }
 

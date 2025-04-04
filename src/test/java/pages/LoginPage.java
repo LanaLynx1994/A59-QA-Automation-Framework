@@ -7,6 +7,7 @@ public class LoginPage extends BasePage{
 
     //Constructor
     public LoginPage(WebDriver givenDriver) {
+
         super(givenDriver);
     }
 
